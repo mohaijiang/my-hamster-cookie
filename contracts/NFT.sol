@@ -19,6 +19,10 @@ contract NFT is ERC721, ERC721Enumerable, ERC721URIStorage, Pausable, Ownable, E
 
     constructor(string memory name, string memory symbol, string memory version) ERC721(name, symbol) EIP712(name, version) {}
 
+    modifier onlyMinter {
+      minters[msg.sender] == true_;
+    }
+
     function pause() public onlyOwner {
         _pause();
     }
